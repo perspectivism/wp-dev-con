@@ -1,0 +1,15 @@
+{
+  "overrides": [
+    {
+      "files": "*.ts",
+      "options": {
+        "semi": false
+      }
+    }
+  ],
+  "plugins": ["@prettier/plugin-php", "prettier-plugin-tailwindcss"],
+  "printWidth": 80,
+  "semi": true,
+  "singleQuote": true,
+  "trailingComma": "none"
+}

@@ -1,0 +1,25 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "Listen for Xdebug",
+      "type": "php",
+      "request": "launch",
+      "port": 9003
+    },
+    {
+      "name": "Launch Chrome",
+      "request": "launch",
+      "type": "chrome",
+      "url": "http://${env:DOMAIN}",
+      "webRoot": "${workspaceFolder}/${env:DOMAIN}/html"
+    }
+  ],
+  "compounds": [
+    {
+      "name": "Debug PHP + JS",
+      "configurations": ["Listen for Xdebug", "Launch Chrome"],
+      "stopAll": true
+    }
+  ]
+}

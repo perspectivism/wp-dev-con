@@ -1,0 +1,28 @@
+{
+  // Set Prettier as the default
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+
+  // Format files on paste
+  "editor.formatOnPaste": true,
+
+  // Format files on save
+  "editor.formatOnSave": true,
+
+  // Always open .css files in Tailwind CSS mode
+  "files.associations": {
+    "*.css": "tailwindcss"
+  },
+
+  // Tailwind plugin recommended setting
+  "editor.quickSuggestions": {
+    "strings": "on"
+  },
+
+  /*
+   * Workaround for bug:
+   *   https://github.com/prettier/plugin-php/issues/1730
+   */
+  "prettier.documentSelectors": [
+    "**/*.{js,jsx,ts,tsx,vue,html,css,scss,less,json,md,mdx,graphql,yaml,yml,php}"
+  ]
+}

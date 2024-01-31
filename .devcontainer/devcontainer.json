@@ -1,0 +1,22 @@
+{
+    "name": "WordPress Development Container",
+    "service": "litespeed",
+    "workspaceFolder": "/var/www/vhosts",
+    "shutdownAction": "stopCompose",
+
+    "dockerComposeFile": "./docker-compose.yml",
+
+    "customizations": {
+        "vscode": {
+            "extensions": [
+                "bmewburn.vscode-intelephense-client",
+                "bradlc.vscode-tailwindcss",
+                "esbenp.prettier-vscode",
+                "dbaeumer.vscode-eslint",
+                "xdebug.php-debug"
+            ]
+        }
+    },
+
+    "remoteUser": "vscode"
+}

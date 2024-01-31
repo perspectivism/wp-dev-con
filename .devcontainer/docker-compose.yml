@@ -1,0 +1,71 @@
+version: '3'
+networks:
+  default:
+    driver: bridge
+services:
+  litespeed:
+    build:
+      args:
+        - OLS_VERSION=${OLS_VERSION}
+        - PHP_VERSION=${PHP_VERSION}
+      dockerfile: ./wordpress-dev.Dockerfile
+    depends_on:
+      - mysql
+      - redis
+    env_file:
+      - .env
+    logging:
+     driver: none
+    networks:
+      - default
+    ports:
+      - 80:80
+      - 443:443
+      - 443:443/udp
+      - 7080:7080
+    restart: always
+    volumes:
+      - ./workspace-ols/acme:/root/.acme.sh
+      - ./workspace-ols/logs:/usr/local/lsws/logs
+      - ./workspace-ols/lsws/admin-conf:/usr/local/lsws/admin/conf      
+      - ./workspace-ols/lsws/conf:/usr/local/lsws/conf
+      - ./workspace-ols/sites/localhost/html:/var/www/vhosts/${DOMAIN}/html
+      - ./workspace-ols/sites/localhost/logs:/var/www/vhosts/${DOMAIN}/logs
+      - ./workspace-vscode:/var/www/vhosts
+      - ./workspace-wordpress/custom-plugin:/var/www/vhosts/${DOMAIN}/html/wp-content/plugins/custom-plugin
+      - ./workspace-wordpress/custom-theme:/var/www/vhosts/${DOMAIN}/html/wp-content/themes/custom-theme
+  mysql:
+    command: ["--max-allowed-packet=512M"]
+    env_file:
+      - .env
+    image: mariadb:10.5.23
+    logging:
+      driver: none
+    networks:
+      - default
+    restart: always
+    volumes:
+      - ./workspace-ols/data/db:/var/lib/mysql:delegated
+  phpmyadmin:
+    depends_on:
+      - mysql
+    environment:
+        DATABASE_HOST: mysql
+    image: bitnami/phpmyadmin:5.2.1
+    networks:
+      - default    
+    ports:
+      - 8080:8080
+      - 8443:8443
+    restart: always
+  redis:
+    environment:
+      - REDIS_REPLICATION_MODE=master
+    image: redis:alpine
+    logging:
+      driver: none
+    networks:
+      - default
+    restart: always
+    volumes:
+      - ./workspace-ols/redis/data:/data
