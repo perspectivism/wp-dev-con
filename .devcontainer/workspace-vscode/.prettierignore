@@ -1,7 +1,10 @@
 */html/*.php
+*/html/wp-admin
 */html/wp-content/*.php
 */html/wp-content/plugins/*
 */html/wp-content/wp-themes/*
 */html/wp-includes
 !*/html/wp-content/plugins/custom-plugin
 !*/html/wp-content/themes/custom-theme
+*/html/wp-content/plugins/custom-plugin/dist
+*/html/wp-content/themes/custom-theme/dist
